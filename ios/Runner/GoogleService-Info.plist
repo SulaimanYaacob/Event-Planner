@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>359051467149-4pb90f0ofb9rcru923dr5g375ia54efi.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.359051467149-4pb90f0ofb9rcru923dr5g375ia54efi</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAQpENhqrqIFfp8xmfGW6AwOBpfGQL4vJA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>359051467149</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.eventPlanner</string>
+	<key>PROJECT_ID</key>
+	<string>event-planner-615f6</string>
+	<key>STORAGE_BUCKET</key>
+	<string>event-planner-615f6.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:359051467149:ios:bda88b6fa1f237fb2085c4</string>
+</dict>
+</plist>

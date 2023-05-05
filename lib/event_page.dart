@@ -1,3 +1,6 @@
+import 'package:event_planner/models/events_model.dart';
+import 'package:event_planner/services/events.service.dart';
+import 'package:event_planner/widgets/events_tile.widget.dart';
 import 'package:flutter/material.dart';
 
 class EventPage extends StatefulWidget {
@@ -8,86 +11,57 @@ class EventPage extends StatefulWidget {
 }
 
 class _EventPageState extends State<EventPage> {
+  List<Event> events = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getEvents().then((value) => setState(() {
+          events = value;
+        }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Events'),
-        ),
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              const UserAccountsDrawerHeader(
-                accountName: Text('John Doe'),
-                accountEmail: Text('johndoe@gmail.com'),
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.amberAccent,
-                  child: Icon(
-                    Icons.local_fire_department_outlined,
-                    color: Colors.red,
-                    size: 50,
-                  ),
+      appBar: AppBar(
+        title: const Text('Events'),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const UserAccountsDrawerHeader(
+              accountName: Text('John Doe'),
+              accountEmail: Text('johndoe@gmail.com'),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.amberAccent,
+                child: Icon(
+                  Icons.local_fire_department_outlined,
+                  color: Colors.red,
+                  size: 50,
                 ),
               ),
-              //TODO Create its own widget
-              ListTile(
-                leading: const Icon(Icons.home),
-                title: const Text('Home'),
-                onTap: () => {
-                  //Navigate to different page
-                },
-                autofocus: true,
-              ),
-            ],
-          ),
+            ),
+            //TODO Create its own widget
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () => {
+                //Navigate to different page
+              },
+              autofocus: true,
+            ),
+          ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: GridView.count(
-            crossAxisCount: 2,
-            children: [
-              Stack(
-                children: [
-                  GridTile(
-                    footer: Material(
-                      color: Colors.transparent,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                              bottom: Radius.circular(4.0))),
-                      clipBehavior: Clip.antiAlias,
-                      child: InkWell(
-                        onTap: () => debugPrint('Event 1'),
-                        child: GridTileBar(
-                          title: const Text('Event 1'),
-                          subtitle: const Text('Subtitle'),
-                          backgroundColor: Colors.black45,
-                          trailing: IconButton(
-                            splashRadius: 20.0,
-                            icon: const Icon(Icons.favorite_border),
-                            onPressed: () => {
-                              debugPrint('Favorite'),
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                    child: Semantics(
-                      child: Material(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4.0)),
-                        clipBehavior: Clip.antiAlias,
-                        child: const Image(
-                          image: NetworkImage(
-                              'https://picsum.photos/250?image=53'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ));
+      ),
+      body: GridView.count(
+        crossAxisCount: 2,
+        children: events.map((event) {
+          return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: EventTile(event: event));
+        }).toList(),
+      ),
+    );
   }
 }

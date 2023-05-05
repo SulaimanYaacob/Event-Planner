@@ -3,18 +3,60 @@
     "id": 1,
     "title": "Marathon",
     "subtitle": "Run for your life",
-    "img": "https://thumbs.dreamstime.com/b/group-marathon-runners-abstract-swirl-backgr-21317626.jpg"
+    "image": "https://thumbs.dreamstime.com/b/group-marathon-runners-abstract-swirl-backgr-21317626.jpg"
   },
   {
     "id": 2,
     "title": "Birthday",
     "subtitle": "Happy Birthday",
-    "img": "https://hips.hearstapps.com/hmg-prod/images/unnamed-1653441587.png"
+    "image": "https://hips.hearstapps.com/hmg-prod/images/unnamed-1653441587.png"
   },
   {
     "id": 3,
     "title": "Job opportunities",
     "subtitle": " We are hiring",
-    "img": "https://www.penangcatcentre.my/wp-content/uploads/2020/04/JO.jpg"
+    "image": "https://www.penangcatcentre.my/wp-content/uploads/2020/04/JO.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Job opportunities",
+    "subtitle": " We are hiring",
+    "image": "https://www.penangcatcentre.my/wp-content/uploads/2020/04/JO.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Job opportunities",
+    "subtitle": " We are hiring",
+    "image": "https://www.penangcatcentre.my/wp-content/uploads/2020/04/JO.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Job opportunities",
+    "subtitle": " We are hiring",
+    "image": "https://www.penangcatcentre.my/wp-content/uploads/2020/04/JO.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Job opportunities",
+    "subtitle": " We are hiring",
+    "image": "https://www.penangcatcentre.my/wp-content/uploads/2020/04/JO.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Job opportunities",
+    "subtitle": " We are hiring",
+    "image": "https://www.penangcatcentre.my/wp-content/uploads/2020/04/JO.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Job opportunities",
+    "subtitle": " We are hiring",
+    "image": "https://www.penangcatcentre.my/wp-content/uploads/2020/04/JO.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Job opportunities",
+    "subtitle": " We are hiring",
+    "image": "https://www.penangcatcentre.my/wp-content/uploads/2020/04/JO.jpg"
   }
 ]

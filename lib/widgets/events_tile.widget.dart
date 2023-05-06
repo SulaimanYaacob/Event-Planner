@@ -1,10 +1,23 @@
 import 'package:event_planner/models/events_model.dart';
 import 'package:flutter/material.dart';
 
-class EventTile extends StatelessWidget {
+class EventTile extends StatefulWidget {
   final Event event;
 
   const EventTile({Key? key, required this.event}) : super(key: key);
+
+  @override
+  State<EventTile> createState() => _EventTileState();
+}
+
+class _EventTileState extends State<EventTile> {
+  bool _isFavorited = false;
+
+  void toggleFavorite() {
+    setState(() {
+      _isFavorited = !_isFavorited;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +28,20 @@ class EventTile extends StatelessWidget {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(4.0)),
         ),
         child: InkWell(
-          onTap: () => debugPrint('Tapped ${event.title}'),
+          onTap: () => debugPrint('Tapped ${widget.event.title}'),
           child: GridTileBar(
-            title: Text(event.title),
-            subtitle: Text(event.subtitle),
+            title: Text(widget.event.title),
+            subtitle: Text(widget.event.subtitle),
             backgroundColor: Colors.black45,
             trailing: IconButton(
               splashRadius: 20.0,
-              icon: const Icon(Icons.favorite_border),
-              onPressed: () => debugPrint('Favorite'),
+              icon: _isFavorited
+                  ? const Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                    )
+                  : const Icon(Icons.favorite_border),
+              onPressed: toggleFavorite,
             ),
           ),
         ),
@@ -33,7 +51,7 @@ class EventTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(4.0),
         ),
         child: Image(
-          image: NetworkImage(event.image),
+          image: NetworkImage(widget.event.image),
           fit: BoxFit.cover,
         ),
       ),

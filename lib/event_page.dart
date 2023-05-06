@@ -42,7 +42,7 @@ class _EventPageState extends State<EventPage> {
                 ),
               ),
             ),
-            //TODO Create its own widget
+            //TODO Move this widget to a landing page
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text('Home'),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class EventTile extends StatefulWidget {
   final Event event;
-
   const EventTile({Key? key, required this.event}) : super(key: key);
 
   @override
@@ -12,8 +11,13 @@ class EventTile extends StatefulWidget {
 
 class _EventTileState extends State<EventTile> {
   bool _isFavorited = false;
-
   void toggleFavorite() {
+    final eventTitle = widget.event.title;
+
+    _isFavorited
+        ? debugPrint('$eventTitle is Removed from favorites')
+        : debugPrint('$eventTitle is Added to favorites');
+
     setState(() {
       _isFavorited = !_isFavorited;
     });
@@ -21,6 +25,8 @@ class _EventTileState extends State<EventTile> {
 
   @override
   Widget build(BuildContext context) {
+    final event = widget.event;
+
     return GridTile(
       footer: Material(
         color: Colors.transparent,
@@ -28,10 +34,10 @@ class _EventTileState extends State<EventTile> {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(4.0)),
         ),
         child: InkWell(
-          onTap: () => debugPrint('Tapped ${widget.event.title}'),
+          onTap: () => debugPrint('Tapped ${event.title}'),
           child: GridTileBar(
-            title: Text(widget.event.title),
-            subtitle: Text(widget.event.subtitle),
+            title: Text(event.title),
+            subtitle: Text(event.subtitle),
             backgroundColor: Colors.black45,
             trailing: IconButton(
               splashRadius: 20.0,
@@ -51,7 +57,7 @@ class _EventTileState extends State<EventTile> {
           borderRadius: BorderRadius.circular(4.0),
         ),
         child: Image(
-          image: NetworkImage(widget.event.image),
+          image: NetworkImage(event.image),
           fit: BoxFit.cover,
         ),
       ),

@@ -58,8 +58,9 @@ class _EventPageState extends State<EventPage> {
         crossAxisCount: 2,
         children: events.map((event) {
           return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: EventTile(event: event));
+            padding: const EdgeInsets.all(8.0),
+            child: EventTile(event: event),
+          );
         }).toList(),
       ),
     );

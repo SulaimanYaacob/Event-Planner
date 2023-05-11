@@ -2,8 +2,6 @@ import 'package:event_planner/views/event_page.dart';
 import 'package:event_planner/views/my_EventPage.dart';
 import 'package:event_planner/widgets/drawer.dart';
 import 'package:flutter/material.dart';
-import 'login.dart';
-
 import 'constants/drawer_sections.dart';
 
 void main() {
@@ -26,10 +24,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
-
 
   @override
   State<HomePage> createState() => _HomePageState();

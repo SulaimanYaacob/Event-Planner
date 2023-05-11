@@ -1,5 +1,6 @@
-import 'package:event_planner/event_page.dart';
+import 'package:event_planner/views/event_page.dart';
 import 'package:flutter/material.dart';
+import 'package:event_planner/views/my_EventPage.dart';
 
 void main() {
   runApp(const MyApp());

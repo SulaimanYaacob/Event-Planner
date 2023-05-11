@@ -1,3 +1,4 @@
+import 'package:event_planner/widgets/materialColor.dart';
 import 'package:flutter/material.dart';
 import 'package:event_planner/my_EventPage.dart';
 
@@ -13,40 +14,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Event Planner',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: generateMaterialColor(Palette.primary),
       ),
-      home: const MyHomePage(title: 'Event Planner Home Page'),
+      home: const MyEventPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          child: const Text('My Events'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const MyEventPage()),
-            );
-          },
-        ),
-      ),
-    );
-  }
+class Palette {
+  static const Color primary = Color(0xFFB71C1C);
 }

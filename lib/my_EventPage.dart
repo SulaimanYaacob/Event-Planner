@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:event_planner/widgets/events_tile.Widget.dart';
-import 'package:event_planner/models/events_model.dart';
-import 'package:event_planner/services/myEvents.service.dart';
 
 class MyEventPage extends StatefulWidget {
   const MyEventPage({Key? key}) : super(key: key);
@@ -11,56 +8,58 @@ class MyEventPage extends StatefulWidget {
 }
 
 class _MyEventPageState extends State<MyEventPage> {
-  List<Event> events = [];
-
-  @override
-  void initState() {
-    super.initState();
-    getMyEvents().then((value) => setState(() {
-          events = value;
-        }));
-  }
+  final List<String> events = [
+    'https://media.istockphoto.com/id/499517325/photo/a-man-speaking-at-a-business-conference.jpg?s=612x612&w=0&k=20&c=gWTTDs_Hl6AEGOunoQ2LsjrcTJkknf9G8BGqsywyEtE=',
+    'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGF1bmNoJTIwZXZlbnR8ZW58MHx8MHx8&w=1000&q=80',
+    'https://www.tamarindglobal.com/images/events/events.jpg',
+    'https://blog.vantagecircle.com/content/images/2019/06/company-event.png',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Events'),
+        title: const Text('My Event'),
       ),
       drawer: Drawer(
         child: ListView(
+          padding: EdgeInsets.zero,
           children: [
-            const UserAccountsDrawerHeader(
-              accountName: Text('John Doe'),
-              accountEmail: Text('johndoe@gmail.com'),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.amberAccent,
-                child: Icon(
-                  Icons.local_fire_department_outlined,
-                  color: Colors.red,
-                  size: 50,
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 88, 20, 21),
+              ),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24.0,
                 ),
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Home'),
-              onTap: () => {
-                //navigate to a different page
+              title: const Text('Item 1'),
+              onTap: () {
+                Navigator.pop(context);
               },
-              autofocus: true,
+            ),
+            ListTile(
+              title: const Text('Item 2'),
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        children: events.map((event) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: EventTile(event: event),
-          );
-        }).toList(),
+      body: GridView.builder(
+        padding: EdgeInsets.all(32),
+        itemCount: events.length,
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        itemBuilder: (BuildContext context, index) {
+          return Image.network(events[index]);
+        },
       ),
     );
   }

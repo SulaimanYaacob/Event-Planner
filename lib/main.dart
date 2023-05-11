@@ -1,6 +1,6 @@
-import 'package:event_planner/event_page.dart';
+import 'package:event_planner/views/event_page.dart';
 import 'package:flutter/material.dart';
-import 'package:event_planner/my_EventPage.dart';
+import 'package:event_planner/views/my_EventPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,11 +17,43 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const EventPage(),
+      home: const HomePage(),
     );
   }
 }
 
-class Palette {
-  static const Color primary = Color(0xFFB71C1C);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Hello"),
+      ),
+      body: Container(
+        child: const Center(
+          child: Text("Home Page"),
+        ),
+      ),
+      drawer: Drawer(
+        child: SingleChildScrollView(
+          child: Container(
+            child: Column(children: [
+              Container(
+                width: double.infinity,
+                height: 200,
+                padding: EdgeInsets.only(top: 20.0),
+              )
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
 }

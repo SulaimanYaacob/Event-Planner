@@ -58,9 +58,10 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets /images/
-    - .env # path to your .env
 
+    - lib/data/
+    - assets/images/
+    # - .env # path to your .env
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class MyDrawer extends StatefulWidget {
-  const MyDrawer({Key? key}) : super(key: key);
+class MyDrawerHeader extends StatefulWidget {
+  const MyDrawerHeader({Key? key}) : super(key: key);
 
   @override
-  State<MyDrawer> createState() => _MyDrawerState();
+  State<MyDrawerHeader> createState() => _MyDrawerHeaderState();
 }
 
 //! This widget is hardcoded, will change later after we get the backend running.
-class _MyDrawerState extends State<MyDrawer> {
+class _MyDrawerHeaderState extends State<MyDrawerHeader> {
   @override
   Widget build(BuildContext context) {
     return Column(

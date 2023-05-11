@@ -34,11 +34,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var currentPage = DrawerSections.events;
+  Widget container = const EventPage();
 
   @override
   Widget build(BuildContext context) {
-    Widget container = const EventPage();
-
     // Use this as a page navigation
     if (currentPage == DrawerSections.events) container = const EventPage();
     if (currentPage == DrawerSections.myEvents) container = const MyEventPage();
@@ -48,14 +47,15 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(currentPage.name),
+        title: Text(
+            currentPage.name[0].toUpperCase() + currentPage.name.substring(1)),
       ),
       body: container,
       drawer: Drawer(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const MyDrawer(),
+              const MyDrawerHeader(),
               Container(
                 padding: const EdgeInsets.only(top: 15),
                 child: Column(

@@ -1,5 +1,10 @@
+import 'package:event_planner/views/event_page.dart';
+import 'package:event_planner/views/my_EventPage.dart';
+import 'package:event_planner/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'login.dart';
+
+import 'constants/drawer_sections.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,101 +13,115 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      home: const HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class _HomePageState extends State<HomePage> {
+  var currentPage = DrawerSections.events;
+  Widget container = const EventPage();
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    // Use this as a page navigation
+    if (currentPage == DrawerSections.events) container = const EventPage();
+    if (currentPage == DrawerSections.myEvents) container = const MyEventPage();
+    if (currentPage == DrawerSections.profile) {
+      container = const Text("Profile"); //TODO Rizdwan task
+    }
+
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(
+            currentPage.name[0].toUpperCase() + currentPage.name.substring(1)),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body: container,
+      drawer: Drawer(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const MyDrawerHeader(),
+              Container(
+                padding: const EdgeInsets.only(top: 15),
+                child: Column(
+                  children: [
+                    menuItem(
+                      1,
+                      "Profile",
+                      Icons.person,
+                      currentPage == DrawerSections.profile ? true : false,
+                    ),
+                    menuItem(
+                      2,
+                      "Events",
+                      Icons.event,
+                      currentPage == DrawerSections.events ? true : false,
+                    ),
+                    menuItem(
+                      3,
+                      "My Events",
+                      Icons.event_available,
+                      currentPage == DrawerSections.myEvents ? true : false,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Widget menuItem(int id, String title, IconData icon, bool selected) {
+    return Material(
+      color: selected ? Colors.grey[200] : Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          Navigator.pop(context);
+          setState(() {
+            if (id == 1) currentPage = DrawerSections.profile;
+            if (id == 2) currentPage = DrawerSections.events;
+            if (id == 3) currentPage = DrawerSections.myEvents;
+          });
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: Icon(
+                  icon,
+                  size: 20,
+                  color: Colors.black,
+                ),
+              ),
+              Expanded(
+                  flex: 3,
+                  child: Text(
+                    title,
+                    style: const TextStyle(color: Colors.black, fontSize: 16),
+                  )),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

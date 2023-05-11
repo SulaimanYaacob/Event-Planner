@@ -1,6 +1,6 @@
 import 'package:event_planner/models/events_model.dart';
 import 'package:event_planner/services/events.service.dart';
-import 'package:event_planner/widgets/events_tile.widget.dart';
+import 'package:event_planner/widgets/events_tile.dart';
 import 'package:flutter/material.dart';
 
 class EventPage extends StatefulWidget {
@@ -24,36 +24,6 @@ class _EventPageState extends State<EventPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Events'),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            const UserAccountsDrawerHeader(
-              accountName: Text('John Doe'),
-              accountEmail: Text('johndoe@gmail.com'),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.amberAccent,
-                child: Icon(
-                  Icons.local_fire_department_outlined,
-                  color: Colors.red,
-                  size: 50,
-                ),
-              ),
-            ),
-            //TODO Move this widget to a landing page
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Home'),
-              onTap: () => {
-                //Navigate to different page
-              },
-              autofocus: true,
-            ),
-          ],
-        ),
-      ),
       body: GridView.count(
         crossAxisCount: 2,
         children: events.map((event) {

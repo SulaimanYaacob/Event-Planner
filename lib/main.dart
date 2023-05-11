@@ -1,4 +1,4 @@
-import 'package:event_planner/widgets/materialColor.dart';
+import 'package:event_planner/event_page.dart';
 import 'package:flutter/material.dart';
 import 'package:event_planner/my_EventPage.dart';
 
@@ -12,11 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Event Planner',
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: generateMaterialColor(Palette.primary),
+        primarySwatch: Colors.blue,
       ),
-      home: const MyEventPage(),
+      home: const EventPage(),
     );
   }
 }

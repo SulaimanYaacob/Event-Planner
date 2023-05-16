@@ -17,16 +17,16 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -49,21 +49,20 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBtJcLjlvQfgNGqaOqrA_7fndByd1a5jMg',
+    appId: '1:359051467149:web:03c056d852fb3fbf2085c4',
+    messagingSenderId: '359051467149',
+    projectId: 'event-planner-615f6',
+    authDomain: 'event-planner-615f6.firebaseapp.com',
+    storageBucket: 'event-planner-615f6.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBPUUjPK-C7F7agAtz4ICvSu27paafDM0k',
     appId: '1:359051467149:android:6d0cf1040eca321b2085c4',
     messagingSenderId: '359051467149',
     projectId: 'event-planner-615f6',
     storageBucket: 'event-planner-615f6.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAQpENhqrqIFfp8xmfGW6AwOBpfGQL4vJA',
-    appId: '1:359051467149:ios:bda88b6fa1f237fb2085c4',
-    messagingSenderId: '359051467149',
-    projectId: 'event-planner-615f6',
-    storageBucket: 'event-planner-615f6.appspot.com',
-    iosClientId: '359051467149-4pb90f0ofb9rcru923dr5g375ia54efi.apps.googleusercontent.com',
-    iosBundleId: 'com.example.eventPlanner',
   );
 }

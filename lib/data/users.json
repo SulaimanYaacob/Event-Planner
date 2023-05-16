@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "username": "johndoe",
+    "password": "password123",
+    "name": "John Doe",
+    "role": "student",
+    "age": 21,
+    "phone_number": "123-456-7890",
+    "bio": "I am a student at the University of California, Berkeley. I am majoring in computer science.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/John_Doe_2007.jpg/220px-John_Doe_2007.jpg"
+  },
+  {
+    "id": 2,
+    "username": "janedoe",
+    "password": "password123",
+    "name": "Jane Doe",
+    "role": "admin",
+    "age": 35,
+    "phone_number": "123-456-7891",
+    "bio": "I am an administrator at the University of California, Berkeley. I am responsible for managing the university's website and computer systems.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Jane_Doe_2007.jpg/220px-Jane_Doe_2007.jpg"
+  }
+]

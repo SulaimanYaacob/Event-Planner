@@ -1,6 +1,8 @@
 import 'package:event_planner/views/event_page.dart';
 import 'package:event_planner/views/my_EventPage.dart';
+import 'package:event_planner/views/profile_page.dart';
 import 'package:event_planner/widgets/drawer.dart';
+
 import 'package:flutter/material.dart';
 import 'constants/drawer_sections.dart';
 
@@ -40,9 +42,7 @@ class _HomePageState extends State<HomePage> {
     // Use this as a page navigation
     if (currentPage == DrawerSections.events) container = const EventPage();
     if (currentPage == DrawerSections.myEvents) container = const MyEventPage();
-    if (currentPage == DrawerSections.profile) {
-      container = const Text("Profile"); //TODO Rizdwan task
-    }
+    if (currentPage == DrawerSections.profile) container = const ProfilePage();
 
     return Scaffold(
       appBar: AppBar(

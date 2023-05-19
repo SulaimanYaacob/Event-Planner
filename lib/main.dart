@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'constants/drawer_sections.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+//import 'package:flutter_icons/flutter_icons.dart';
+//import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 
 Future<void> main() async {
@@ -66,13 +67,14 @@ class _HomePageState extends State<HomePage> {
         title: Text(
             currentPage.name[0].toUpperCase() + currentPage.name.substring(1)),
             actions: <Widget>[
-              TextButton.icon(
-                icon: const Icon(Icons.person),
-                label: const Text('logout'),
+              ElevatedButton.icon(
                 onPressed: () async {
                   await AuthService().signOut();
                 },
+                icon: Icon(Icons.person),
+                label: Text('logout'),
               ),
+
             ],
       ),
       body: container,

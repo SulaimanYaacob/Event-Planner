@@ -1,3 +1,4 @@
+import 'package:event_planner/authenticate/authenticate.dart';
 import 'package:event_planner/firebase_options.dart';
 import 'package:event_planner/views/event_page.dart';
 import 'package:event_planner/views/my_EventPage.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: Authenticate(),
     );
   }
 }

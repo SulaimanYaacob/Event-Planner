@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'constants/drawer_sections.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +42,8 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  //final AuthService _auth = AuthService();
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -61,6 +65,15 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(
             currentPage.name[0].toUpperCase() + currentPage.name.substring(1)),
+            actions: <Widget>[
+              TextButton.icon(
+                icon: const Icon(Icons.person),
+                label: const Text('logout'),
+                onPressed: () async {
+                  await AuthService().signOut();
+                },
+              ),
+            ],
       ),
       body: container,
       drawer: Drawer(

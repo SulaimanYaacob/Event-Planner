@@ -1,9 +1,13 @@
 import 'package:event_planner/authenticate/authenticate.dart';
 import 'package:event_planner/firebase_options.dart';
+import 'package:event_planner/home/wrapper.dart';
+import 'package:event_planner/models/user.dart' as Planner;
+import 'package:event_planner/services/auth.dart';
 import 'package:event_planner/views/event_page.dart';
 import 'package:event_planner/views/my_EventPage.dart';
 import 'package:event_planner/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'constants/drawer_sections.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -18,13 +22,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return StreamProvider<Planner.User?>.value(
+      value: AuthService().user,
+      initialData: null,
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Wrapper(),
       ),
-      home: Authenticate(),
     );
   }
 }

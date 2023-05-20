@@ -1,27 +1,30 @@
-import 'package:event_planner/services/auth.dart';
 import 'package:flutter/material.dart';
+import '../services/auth.dart';
 
-class SignIn extends StatefulWidget {
- 
+class Register extends StatefulWidget {
+  const Register({super.key});
+
   @override
-  _SignInState createState() => _SignInState();
+  State<Register> createState() => _RegisterState();
 }
-  class _SignInState extends State<SignIn> {
 
-    final AuthService _auth = AuthService();
+class _RegisterState extends State<Register>{
 
-    // text field state
-    String email = '';
-    String password = '';
+final AuthService _auth = AuthService();
 
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
+  // text field state
+  String email = '';
+  String password = '';
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return Scaffold(
         backgroundColor: Colors.brown[100],
         appBar: AppBar(
           backgroundColor: Colors.brown[400],
           elevation: 0.0,
-          title: Text('Sign in to Event Planner'),
+          title: Text('Sign up to Event Planner'),
         ),
         body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -47,7 +50,7 @@ class SignIn extends StatefulWidget {
               ),
               SizedBox(height: 20.0),
               ElevatedButton(
-                child: Text('Sign in'),
+                child: Text('Register'),
                 onPressed: () async {
                   print(email);
                   print(password);
@@ -55,21 +58,10 @@ class SignIn extends StatefulWidget {
               ),
             ]),
           ),
-
-          //Anon sign in button
-          // child: ElevatedButton(
-          //   child: Text('Sign in anon'),
-          //   onPressed: () async{
-          //     dynamic result = await _auth.signInAnon();
-          //     if(result == null){
-          //       print('error signing in');
-          //     } else {
-          //       print('signed in');
-          //       print(result.uid);
-          //     }
-          //   },
-          // ),
         ),
       );
-    }
+
   }
+  
+
+}

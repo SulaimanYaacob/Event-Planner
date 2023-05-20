@@ -1,3 +1,4 @@
+import 'package:event_planner/authenticate/register.dart';
 import 'package:event_planner/authenticate/sign_in.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class Authenticate extends StatefulWidget {
     @override
     Widget build(BuildContext context) {
       return Container(
-        child: SignIn(),
+        child: Register(),
       );
     }
   }

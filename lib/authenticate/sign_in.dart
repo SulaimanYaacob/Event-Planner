@@ -2,6 +2,9 @@ import 'package:event_planner/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
+
+  final Function toggleView;
+  SignIn({super.key, required this.toggleView});
  
   @override
   _SignInState createState() => _SignInState();
@@ -22,6 +25,15 @@ class SignIn extends StatefulWidget {
           backgroundColor: Colors.brown[400],
           elevation: 0.0,
           title: Text('Sign in to Event Planner'),
+          actions: <Widget>[
+            TextButton.icon(
+              icon: Icon(Icons.person),
+              label: Text('Register'),
+              onPressed: () {
+                widget.toggleView();
+              },
+            ),
+          ],
         ),
         body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),

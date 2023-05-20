@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import '../services/auth.dart';
 
 class Register extends StatefulWidget {
-  const Register({super.key});
+  final Function toggleView;
+  Register({super.key, required this.toggleView});
 
   @override
   State<Register> createState() => _RegisterState();
@@ -25,6 +26,15 @@ final AuthService _auth = AuthService();
           backgroundColor: Colors.brown[400],
           elevation: 0.0,
           title: Text('Sign up to Event Planner'),
+          actions: <Widget>[
+            TextButton.icon(
+              icon: Icon(Icons.person),
+              label: Text('Sign in'),
+              onPressed: () {
+                widget.toggleView();
+              },
+            ),
+          ],
         ),
         body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),

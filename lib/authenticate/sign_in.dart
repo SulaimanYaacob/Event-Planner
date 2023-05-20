@@ -40,6 +40,7 @@ class SignIn extends StatefulWidget {
         body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
           key: _formKey,
+          //Sign in Email and Password
           child: Form(
             child: Column(children: <Widget>[
               SizedBox(height: 20.0),

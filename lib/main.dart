@@ -113,15 +113,19 @@ class _HomePageState extends State<HomePage> {
 
   Widget menuItem(int id, String title, IconData icon, bool selected) {
 
-    if (id == 4){
-      return ElevatedButton.icon(
-        onPressed: () async {
+    if (id == 4) {
+    return Material(
+      color: selected ? Colors.grey[200] : Colors.transparent,
+      child: ListTile(
+        leading: Icon(icon),
+        title: Text(title),
+        selected: selected,
+        onTap: () async {
           await AuthService().signOut();
         },
-        icon: Icon(Icons.person),
-        label: Text('logout'),
-      );
-    }
+      ),
+    );
+  }
     return Material(
       color: selected ? Colors.grey[200] : Colors.transparent,
       child: InkWell(

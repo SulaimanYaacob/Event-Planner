@@ -1,5 +1,5 @@
 enum DrawerSections {
   profile,
   events,
-  myEvents,
+  myEvents, logout,
 }

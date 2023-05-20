@@ -66,16 +66,6 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(
             currentPage.name[0].toUpperCase() + currentPage.name.substring(1)),
-            actions: <Widget>[
-              ElevatedButton.icon(
-                onPressed: () async {
-                  await AuthService().signOut();
-                },
-                icon: Icon(Icons.person),
-                label: Text('logout'),
-              ),
-
-            ],
       ),
       body: container,
       drawer: Drawer(
@@ -105,6 +95,12 @@ class _HomePageState extends State<HomePage> {
                       Icons.event_available,
                       currentPage == DrawerSections.myEvents ? true : false,
                     ),
+                    menuItem(
+                      4,
+                      "Logout",
+                      Icons.logout,
+                      currentPage == DrawerSections.logout ? true : false,
+                    ),
                   ],
                 ),
               )
@@ -116,6 +112,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget menuItem(int id, String title, IconData icon, bool selected) {
+
+    if (id == 4){
+      return ElevatedButton.icon(
+        onPressed: () async {
+          await AuthService().signOut();
+        },
+        icon: Icon(Icons.person),
+        label: Text('logout'),
+      );
+    }
     return Material(
       color: selected ? Colors.grey[200] : Colors.transparent,
       child: InkWell(

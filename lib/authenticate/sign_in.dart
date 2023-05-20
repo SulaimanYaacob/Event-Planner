@@ -17,6 +17,7 @@ class SignIn extends StatefulWidget {
     // text field state
     String email = '';
     String password = '';
+    String error = '';
 
     @override
     Widget build(BuildContext context) {
@@ -38,11 +39,12 @@ class SignIn extends StatefulWidget {
         ),
         body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-
+          key: _formKey,
           child: Form(
             child: Column(children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                validator: (val) => val!.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() {
                     email = val;
@@ -52,6 +54,7 @@ class SignIn extends StatefulWidget {
               SizedBox(height: 20.0),
               TextFormField(
                 obscureText: true,
+                validator: (val) => val!.length < 8 ? 'Enter a password with atleast 8 characters long' : null,
                 onChanged: (val) {
                   setState(() {
                     password = val;
@@ -62,9 +65,20 @@ class SignIn extends StatefulWidget {
               ElevatedButton(
                 child: Text('Sign in'),
                 onPressed: () async {
-                  print(email);
-                  print(password);
+                  if(_formKey.currentState!.validate()){
+                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                    if(result == null){
+                      setState(() {
+                        error = 'Could not sign in with those credentials';
+                      });
+                    }
+                  }
                 },
+              ),
+              SizedBox(height: 12.0),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 14.0),
               ),
             ]),
           ),

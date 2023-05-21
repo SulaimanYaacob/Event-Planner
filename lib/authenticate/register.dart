@@ -1,3 +1,4 @@
+import 'package:event_planner/widgets/inputDecoration.dart';
 import 'package:flutter/material.dart';
 import '../services/auth.dart';
 
@@ -46,6 +47,7 @@ final _formKey = GlobalKey<FormState>();
             child: Column(children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'Email'),
                 validator: (val) => val!.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() {
@@ -55,6 +57,7 @@ final _formKey = GlobalKey<FormState>();
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'Password'),
                 obscureText: true,
                 validator: (val) => val!.length < 8 ? 'Enter a password with atleast 8 characters long' : null,
                 onChanged: (val) {

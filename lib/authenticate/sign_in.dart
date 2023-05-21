@@ -1,4 +1,5 @@
 import 'package:event_planner/services/auth.dart';
+import 'package:event_planner/widgets/inputDecoration.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -45,6 +46,7 @@ class SignIn extends StatefulWidget {
             child: Column(children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'Email'),
                 validator: (val) => val!.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() {
@@ -54,6 +56,7 @@ class SignIn extends StatefulWidget {
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'Password'),
                 obscureText: true,
                 validator: (val) => val!.length < 8 ? 'Enter a password with atleast 8 characters long' : null,
                 onChanged: (val) {

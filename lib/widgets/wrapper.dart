@@ -5,18 +5,17 @@ import 'package:provider/provider.dart';
 import 'package:event_planner/models/user.dart' as Planner;
 
 class Wrapper extends StatelessWidget {
+  const Wrapper({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
     final user = Provider.of<Planner.User?>(context);
-    
-    // return either the Home or Authenticate widget
-    if (user == null){
-      return Authenticate();
-    } else {
-      return HomePage();
-    }
 
+    // return either the Home or Authenticate widget
+    if (user == null) {
+      return const Authenticate();
+    } else {
+      return const HomePage();
+    }
   }
 }

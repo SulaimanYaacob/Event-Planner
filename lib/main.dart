@@ -1,6 +1,6 @@
 import 'package:event_planner/authenticate/authenticate.dart';
 import 'package:event_planner/firebase_options.dart';
-import 'package:event_planner/home/wrapper.dart';
+import 'package:event_planner/widgets/wrapper.dart';
 import 'package:event_planner/models/user.dart' as Planner;
 import 'package:event_planner/services/auth.dart';
 import 'package:event_planner/views/event_page.dart';
@@ -12,7 +12,6 @@ import 'constants/drawer_sections.dart';
 import 'package:firebase_core/firebase_core.dart';
 //import 'package:flutter_icons/flutter_icons.dart';
 //import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -112,20 +111,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget menuItem(int id, String title, IconData icon, bool selected) {
-
     if (id == 4) {
-    return Material(
-      color: selected ? Colors.grey[200] : Colors.transparent,
-      child: ListTile(
-        leading: Icon(icon),
-        title: Text(title),
-        selected: selected,
-        onTap: () async {
-          await AuthService().signOut();
-        },
-      ),
-    );
-  }
+      return Material(
+        color: selected ? Colors.grey[200] : Colors.transparent,
+        child: ListTile(
+          leading: Icon(icon),
+          title: Text(title),
+          selected: selected,
+          onTap: () async {
+            await AuthService().signOut();
+          },
+        ),
+      );
+    }
     return Material(
       color: selected ? Colors.grey[200] : Colors.transparent,
       child: InkWell(

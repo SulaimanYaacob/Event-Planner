@@ -1,21 +1,22 @@
-import 'package:event_planner/authenticate/authenticate.dart';
-import 'package:event_planner/main.dart';
+import 'package:event_planner/drawer_navigation.dart';
+import 'package:event_planner/services/auth.dart';
+import 'package:event_planner/views/login_register_page.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:event_planner/models/user.dart' as Planner;
 
 class Wrapper extends StatelessWidget {
   const Wrapper({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<Planner.User?>(context);
-
-    // return either the Home or Authenticate widget
-    if (user == null) {
-      return const Authenticate();
-    } else {
-      return const HomePage();
-    }
+    return StreamBuilder(
+      stream: Auth().authStateChanges,
+      builder: (context, snapshot) {
+        // if (snapshot.hasData) {
+        //   return const Navigation();
+        // } else {
+        // }
+        return LoginRegisterPage();
+      },
+    );
   }
 }

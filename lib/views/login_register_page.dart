@@ -99,7 +99,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
 
 String? validator(bool isLogin, String value, String label) {
   if (isLogin) {
-    // Database Methods Auth To Check State
+    //TODO Database Methods Auth To Check State
   }
 
   if (label == 'Email') {

@@ -1,11 +1,7 @@
-import 'package:event_planner/firebase_options.dart';
 import 'package:event_planner/drawer_navigation.dart';
+import 'package:event_planner/firebase_options.dart';
+import 'package:event_planner/services/auth.dart';
 import 'package:event_planner/views/login_register_page.dart';
-import 'package:event_planner/widgets/wrapper.dart';
-import 'package:event_planner/models/user.dart' as Planner;
-import 'package:event_planner/views/event_page.dart';
-import 'package:event_planner/views/my_EventPage.dart';
-import 'package:event_planner/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 //import 'package:flutter_icons/flutter_icons.dart';
@@ -22,19 +18,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // StreamProvider<Planner.User?>.value(
-        //   value: AuthService().user,
-        //   initialData: null,
-        //   child:
-        MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Wrapper(),
-    );
+    return StreamBuilder(
+        stream: Auth().authStateChanges,
+        builder: (context, snapshot) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              primaryColor: const Color(0xff872d4a),
+            ),
+            home: snapshot.data != null
+                ? const Navigation()
+                : const LoginRegisterPage(),
+          );
+        });
     // );
   }
 }

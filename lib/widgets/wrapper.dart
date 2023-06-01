@@ -1,4 +1,3 @@
-import 'package:event_planner/drawer_navigation.dart';
 import 'package:event_planner/services/auth.dart';
 import 'package:event_planner/views/login_register_page.dart';
 import 'package:flutter/material.dart';

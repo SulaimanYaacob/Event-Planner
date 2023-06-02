@@ -2,6 +2,10 @@ import 'package:event_planner/drawer_navigation.dart';
 import 'package:event_planner/firebase_options.dart';
 import 'package:event_planner/services/auth.dart';
 import 'package:event_planner/views/login_register_page.dart';
+import 'package:event_planner/views/event_page.dart';
+import 'package:event_planner/views/myEventPage.dart';
+import 'package:event_planner/widgets/drawer.dart';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 

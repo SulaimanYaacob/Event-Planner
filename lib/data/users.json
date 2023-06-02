@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "username": "johndoe",
     "password": "password123",
     "name": "John Doe",
@@ -10,6 +11,7 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/John_Doe_2007.jpg/220px-John_Doe_2007.jpg"
   },
   {
+    "id": 2,
     "username": "janedoe",
     "password": "password123",
     "name": "Jane Doe",

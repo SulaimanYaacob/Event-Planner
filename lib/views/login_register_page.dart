@@ -1,4 +1,5 @@
 import 'package:event_planner/utils/gap_extension.dart';
+import 'package:event_planner/widgets/shared/build_text_form.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../services/auth.dart';
@@ -72,9 +73,17 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                 height: 250,
                 child: Column(
                   children: [
-                    textField('Email', _controllerEmail, 20, isLogin, context),
-                    textField(
-                        'Password', _controllerPassword, 20, isLogin, context),
+                    BuildTextForm(
+                        config: TextFieldConfig(
+                      label: 'Email',
+                      controller: _controllerEmail,
+                      borderRadius: 20,
+                    )),
+                    BuildTextForm(
+                        config: TextFieldConfig(
+                            label: 'Password',
+                            controller: _controllerPassword,
+                            borderRadius: 20))
 
                     // OutlinedButton(
                     //   onPressed: () {
@@ -109,52 +118,6 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
     );
   }
 }
-
-TextFormField textField(String label, TextEditingController input,
-        double borderRadius, bool isLogin, BuildContext context) =>
-    TextFormField(
-      obscureText: label == 'Password',
-      controller: input,
-      cursorColor: Theme.of(context).primaryColor,
-      decoration: InputDecoration(
-        labelText: label,
-        labelStyle: const TextStyle(color: Colors.grey),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-          borderSide:
-              BorderSide(color: Theme.of(context).primaryColor, width: 2.0),
-        ),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(borderRadius))),
-      ),
-      validator: (value) {
-        if (isLogin) {
-          //TODO Database Methods Auth To Check State
-        }
-
-        if (label == 'Email') {
-          if (value!.isEmpty) {
-            return 'Email Required';
-          } else if (!value.contains('@')) {
-            return 'Invalid Email';
-          } else {
-            return null;
-          }
-        }
-
-        if (label == 'Password') {
-          if (value!.isEmpty) {
-            return 'Password Required';
-          } else if (value.length < 6) {
-            return 'Password must be at least 6 characters';
-          } else {
-            return null;
-          }
-        }
-
-        return null;
-      },
-    );
 
 ElevatedButton submitButton(
         Auth auth,

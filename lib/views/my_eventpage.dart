@@ -2,8 +2,7 @@ import 'package:event_planner/models/events_model.dart';
 import 'package:event_planner/widgets/events_tile.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
-
-import '../services/my_events.service.dart';
+import '../services/events.service.dart';
 
 class MyEventPage extends StatefulWidget {
   const MyEventPage({Key? key}) : super(key: key);
@@ -29,7 +28,7 @@ class _MyEventPageState extends State<MyEventPage>
         CurvedAnimation(curve: Curves.easeInOut, parent: _animationController!);
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
     super.initState();
-    getMyEvents().then((value) => setState(() {
+    EventService().getEvents().then((value) => setState(() {
           events = value;
         }));
   }

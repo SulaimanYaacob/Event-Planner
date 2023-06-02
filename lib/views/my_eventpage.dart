@@ -1,8 +1,9 @@
 import 'package:event_planner/models/events_model.dart';
-import 'package:event_planner/services/myEvents.service.dart';
 import 'package:event_planner/widgets/events_tile.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
+
+import '../services/my_events.service.dart';
 
 class MyEventPage extends StatefulWidget {
   const MyEventPage({Key? key}) : super(key: key);

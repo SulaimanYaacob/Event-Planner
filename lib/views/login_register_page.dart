@@ -83,7 +83,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                         config: TextFieldConfig(
                             label: 'Password',
                             controller: _controllerPassword,
-                            borderRadius: 20))
+                            borderRadius: 20)),
 
                     // OutlinedButton(
                     //   onPressed: () {

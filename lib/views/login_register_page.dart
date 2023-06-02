@@ -20,11 +20,20 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         toolbarHeight: 125,
-        title: const Align(
+        title: Align(
           alignment: Alignment.center,
-          child: Image(
-              image: AssetImage('images/UTM.png'), height: 250, width: 250),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white.withOpacity(0.8),
+            ),
+            height: 100,
+            width: 300,
+            padding: const EdgeInsets.all(10),
+            child: const Image(image: AssetImage('images/UTM.png')),
+          ),
         ),
       ),
       body: Container(
@@ -38,8 +47,10 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                 children: [
                   Text(
                     isLogin ? 'Login' : 'Create New Account',
-                    style: const TextStyle(
-                        fontSize: 50, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor),
                     textAlign: TextAlign.center,
                   ),
                   RichText(
@@ -49,7 +60,8 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                             : 'Already have an account? Sign In',
                         recognizer: TapGestureRecognizer()
                           ..onTap = () => setState(() => isLogin = !isLogin),
-                        style: const TextStyle(color: Colors.blue)),
+                        style:
+                            TextStyle(color: Theme.of(context).primaryColor)),
                   ),
                 ].withSpaceBetween(height: 15),
               ),
@@ -60,8 +72,9 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                 height: 250,
                 child: Column(
                   children: [
-                    textField('Email', _controllerEmail, 20, isLogin),
-                    textField('Password', _controllerPassword, 20, isLogin),
+                    textField('Email', _controllerEmail, 20, isLogin, context),
+                    textField(
+                        'Password', _controllerPassword, 20, isLogin, context),
 
                     // OutlinedButton(
                     //   onPressed: () {
@@ -89,7 +102,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
             ),
             Center(
                 child: submitButton(auth, isLogin, _controllerEmail,
-                    _controllerPassword, _formKey))
+                    _controllerPassword, _formKey, context)),
           ],
         ),
       ),
@@ -97,52 +110,59 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
   }
 }
 
-String? validator(bool isLogin, String value, String label) {
-  if (isLogin) {
-    //TODO Database Methods Auth To Check State
-  }
-
-  if (label == 'Email') {
-    if (value.isEmpty) {
-      return 'Email Required';
-    } else if (!value.contains('@')) {
-      return 'Invalid Email';
-    } else {
-      return null;
-    }
-  }
-
-  if (label == 'Password') {
-    if (value.isEmpty) {
-      return 'Password Required';
-    } else if (value.length < 6) {
-      return 'Password must be at least 6 characters';
-    } else {
-      return null;
-    }
-  }
-
-  return null;
-}
-
 TextFormField textField(String label, TextEditingController input,
-        double borderRadius, bool isLogin) =>
+        double borderRadius, bool isLogin, BuildContext context) =>
     TextFormField(
-        obscureText: label == 'Password',
-        controller: input,
-        decoration: InputDecoration(
-          labelText: label,
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(borderRadius))),
+      obscureText: label == 'Password',
+      controller: input,
+      cursorColor: Theme.of(context).primaryColor,
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: const TextStyle(color: Colors.grey),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+          borderSide:
+              BorderSide(color: Theme.of(context).primaryColor, width: 2.0),
         ),
-        validator: (value) => validator(isLogin, value!, label));
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(borderRadius))),
+      ),
+      validator: (value) {
+        if (isLogin) {
+          //TODO Database Methods Auth To Check State
+        }
+
+        if (label == 'Email') {
+          if (value!.isEmpty) {
+            return 'Email Required';
+          } else if (!value.contains('@')) {
+            return 'Invalid Email';
+          } else {
+            return null;
+          }
+        }
+
+        if (label == 'Password') {
+          if (value!.isEmpty) {
+            return 'Password Required';
+          } else if (value.length < 6) {
+            return 'Password must be at least 6 characters';
+          } else {
+            return null;
+          }
+        }
+
+        return null;
+      },
+    );
 
 ElevatedButton submitButton(
         Auth auth,
         bool isLogin,
         TextEditingController email,
         TextEditingController password,
-        GlobalKey<FormState> formKey) =>
+        GlobalKey<FormState> formKey,
+        BuildContext context) =>
     ElevatedButton(
       onPressed: () async {
         if (formKey.currentState!.validate()) {
@@ -168,7 +188,10 @@ ElevatedButton submitButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       child: Text(isLogin ? 'SIGN IN' : 'SIGN UP',
-          style: const TextStyle(fontWeight: FontWeight.bold)),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          )),
     );

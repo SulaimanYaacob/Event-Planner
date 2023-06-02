@@ -4,8 +4,6 @@ import 'package:event_planner/services/auth.dart';
 import 'package:event_planner/views/login_register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-//import 'package:flutter_icons/flutter_icons.dart';
-//import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -16,7 +16,7 @@ class _EventPageState extends State<EventPage> {
   @override
   void initState() {
     super.initState();
-    getEvents().then((value) => setState(() {
+    EventService().getEvents().then((value) => setState(() {
           events = value;
         }));
   }

@@ -1,8 +1,9 @@
 import 'package:event_planner/models/events_model.dart';
-import 'package:event_planner/services/myEvents.service.dart';
 import 'package:event_planner/widgets/events_tile.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
+import 'package:event_planner/views/add_eventpage.dart';
 import 'package:flutter/material.dart';
+import '../services/myevents.service.dart';
 
 class MyEventPage extends StatefulWidget {
   const MyEventPage({Key? key}) : super(key: key);
@@ -21,14 +22,14 @@ class _MyEventPageState extends State<MyEventPage>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 260),
+      duration: const Duration(milliseconds: 260),
     );
 
     final curvedAnimation =
         CurvedAnimation(curve: Curves.easeInOut, parent: _animationController!);
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
     super.initState();
-    getMyEvents().then((value) => setState(() {
+    EventService().getMyEvents().then((value) => setState(() {
           events = value;
         }));
   }
@@ -43,9 +44,11 @@ class _MyEventPageState extends State<MyEventPage>
             iconColor: Colors.white,
             bubbleColor: Colors.blue,
             icon: Icons.calendar_month,
-            titleStyle: TextStyle(fontSize: 16, color: Colors.white),
+            titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
             onPress: () {
-              _animationController!.reverse();
+              //_animationController!.reverse();
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AddEventPage()));
             },
           )
         ],

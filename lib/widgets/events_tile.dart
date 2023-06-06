@@ -57,7 +57,7 @@ class _EventTileState extends State<EventTile> {
           borderRadius: BorderRadius.circular(4.0),
         ),
         child: Image(
-          image: NetworkImage(event.image),
+          image: NetworkImage(event.image ?? ''),
           fit: BoxFit.cover,
         ),
       ),

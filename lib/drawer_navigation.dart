@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'constants/drawer_sections.dart';
 import 'views/event_page.dart';
-import 'views/my_eventpage.dart';
+import 'views/myEventPage.dart';
+import 'views/profile_page.dart';
 import 'widgets/drawer.dart';
 
 class Navigation extends StatefulWidget {
@@ -31,7 +32,7 @@ class _NavigationState extends State<Navigation> {
     if (currentPage == DrawerSections.events) container = const EventPage();
     if (currentPage == DrawerSections.myEvents) container = const MyEventPage();
     if (currentPage == DrawerSections.profile) {
-      container = const Text("Profile"); //TODO Rizdwan task
+      container = const ProfilePage();
     }
 
     return Scaffold(

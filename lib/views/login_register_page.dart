@@ -39,7 +39,8 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 50),
-        child: Column(
+        //change column to listview
+        child: ListView(
           children: [
             SizedBox(
               height: 150,
@@ -84,27 +85,6 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                             label: 'Password',
                             controller: _controllerPassword,
                             borderRadius: 20)),
-
-                    // OutlinedButton(
-                    //   onPressed: () {
-                    //     debugPrint(widget.test.authState());
-                    //   },
-                    //   child: const Text('Click To Check State'),
-                    // ),
-                    // OutlinedButton(
-                    //   onPressed: () async {
-                    //     await widget.test
-                    //         .readUser()
-                    //         .then((value) => debugPrint(value));
-                    //   },
-                    //   child: const Text('Click To test'),
-                    // ),
-                    // OutlinedButton(
-                    //   onPressed: () async {
-                    //     await widget.test.signOut();
-                    //   },
-                    //   child: const Text('Click To Sign Out'),
-                    // ),
                   ].withSpaceBetween(height: 25),
                 ),
               ),

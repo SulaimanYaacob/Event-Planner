@@ -56,15 +56,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
               placeholder: "Username",
               isPasswordTextField: false),
           const ProfileTextField(
-              labelText: "Password",
-              placeholder: "Password",
-              isPasswordTextField: true),
-          const ProfileTextField(
               labelText: "Bio", placeholder: "Bio", isPasswordTextField: false),
           const ProfileTextField(
-              labelText: "Email",
-              placeholder: "Email",
-              isPasswordTextField: false),
+              labelText: "Age", placeholder: "Age", isPasswordTextField: false),
+          const ProfileTextField(
+              labelText: "Job", placeholder: "Job", isPasswordTextField: false),
           const ProfileTextField(
               labelText: "Phone Number",
               placeholder: "Phone Number",

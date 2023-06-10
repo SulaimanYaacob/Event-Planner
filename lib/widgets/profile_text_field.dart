@@ -4,12 +4,12 @@ class ProfileTextField extends StatefulWidget {
   final String labelText;
   final String placeholder;
   final bool isPasswordTextField;
-  const ProfileTextField(
-      {Key? key,
-      required this.labelText,
-      required this.placeholder,
-      required this.isPasswordTextField})
-      : super(key: key);
+  const ProfileTextField({
+    Key? key,
+    required this.labelText,
+    required this.placeholder,
+    required this.isPasswordTextField,
+  }) : super(key: key);
 
   @override
   State<ProfileTextField> createState() => _ProfileTextFieldState();

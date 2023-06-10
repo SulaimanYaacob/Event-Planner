@@ -1,14 +1,21 @@
-import 'dart:convert';
-import 'package:event_planner/models/users_model.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
-Future<List<User>> getUsers() async {
-  final jsonData = await rootBundle.loadString('lib/data/userDetails.json');
-  List<dynamic> jsonList = await json.decode(jsonData);
-  List<User> users = [];
-  for (var element in jsonList) {
-    users.add(User.fromJson(element));
+class UserService {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final CollectionReference _userCollection =
+      FirebaseFirestore.instance.collection('Users');
+
+  Future<String?> getUser() async {
+    final DocumentSnapshot user =
+        await _userCollection.doc(_firebaseAuth.currentUser!.uid).get();
+    return user.data().toString();
   }
 
-  return users;
+  displayUser() async {
+    final DocumentSnapshot user =
+        await _userCollection.doc(_firebaseAuth.currentUser!.uid).get();
+    debugPrint(user.data().toString());
+  }
 }

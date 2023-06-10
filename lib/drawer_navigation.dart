@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'constants/drawer_sections.dart';
 import 'views/event_page.dart';
-import 'views/myEventPage.dart';
+import 'views/my_eventpage.dart';
 import 'views/profile_page.dart';
 import 'widgets/drawer.dart';
 

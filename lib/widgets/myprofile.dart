@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:event_planner/views/edit_profile.dart';
 
+import '../services/users.service.dart';
+
 class MyProfile extends StatefulWidget {
   const MyProfile({Key? key}) : super(key: key);
 
@@ -9,6 +11,16 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
+  late String user = "";
+
+  @override
+  void initState() {
+    super.initState();
+    UserService().getUser().then((value) => setState(() {
+          user = value!;
+        }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -17,6 +29,9 @@ class _MyProfileState extends State<MyProfile> {
           padding: EdgeInsets.zero,
           scrollDirection: Axis.vertical,
           children: [
+            ElevatedButton(
+                onPressed: () => {UserService().displayUser()},
+                child: Text(user)),
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
               child: Container(

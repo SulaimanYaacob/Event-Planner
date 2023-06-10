@@ -42,7 +42,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
         child: Column(
           children: [
             SizedBox(
-              height: 200,
+              height: 150,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -70,7 +70,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
             Form(
               key: _formKey,
               child: SizedBox(
-                height: 250,
+                height: 225,
                 child: Column(
                   children: [
                     BuildTextForm(

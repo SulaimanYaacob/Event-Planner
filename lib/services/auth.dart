@@ -29,6 +29,9 @@ class Auth {
       email: email,
       password: password,
     );
+    await _userCollection
+        .doc(currentUser!.uid)
+        .set({'id': currentUser!.uid, 'email': email, 'password': password});
   }
 
   Future<void> signOut() async {

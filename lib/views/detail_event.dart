@@ -58,7 +58,7 @@ class DetailEvent extends StatelessWidget {
                       indent: 125,
                       endIndent: 125,
                     ),
-                    Text(event.description ?? ''),
+                    Text(event.description ?? '', textAlign: TextAlign.center),
                   ].withSpaceBetween(height: 10),
                 ),
                 Table(

@@ -29,9 +29,12 @@ class Auth {
       email: email,
       password: password,
     );
-    await _userCollection
-        .doc(currentUser!.uid)
-        .set({'id': currentUser!.uid, 'email': email, 'password': password});
+    await _userCollection.doc(currentUser!.uid).set({
+      'id': currentUser!.uid,
+      'email': email,
+      'password': password,
+      'newUser': true
+    });
   }
 
   Future<void> signOut() async {
@@ -40,7 +43,7 @@ class Auth {
 
   Future<String?> readUser() async {
     final DocumentSnapshot user =
-        await _userCollection.doc('d7CMTjd7kK7HzpupXdw4').get();
+        await _userCollection.doc(currentUser!.uid).get();
     // debugPrint(user.data().toString());
     return user.data().toString();
   }

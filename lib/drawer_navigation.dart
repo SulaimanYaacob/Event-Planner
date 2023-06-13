@@ -37,6 +37,7 @@ class _NavigationState extends State<Navigation> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text(
             currentPage.name[0].toUpperCase() + currentPage.name.substring(1)),
       ),

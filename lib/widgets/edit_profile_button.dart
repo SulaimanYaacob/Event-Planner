@@ -1,10 +1,13 @@
+import 'package:event_planner/models/users_model.dart';
 import 'package:event_planner/views/edit_profile.dart';
 import 'package:flutter/material.dart';
 
 class EditProfileButton extends StatefulWidget {
-  const EditProfileButton({
-    Key? key,
-  }) : super(key: key);
+  final User user;
+  final Function refreshProfile;
+  const EditProfileButton(
+      {Key? key, required this.user, required this.refreshProfile})
+      : super(key: key);
 
   @override
   State<EditProfileButton> createState() => _EditProfileButtonState();
@@ -13,6 +16,8 @@ class EditProfileButton extends StatefulWidget {
 class _EditProfileButtonState extends State<EditProfileButton> {
   @override
   Widget build(BuildContext context) {
+    final user = widget.user;
+    final refreshProfile = widget.refreshProfile;
     return Positioned(
       bottom: 0,
       left: 0,
@@ -30,8 +35,12 @@ class _EditProfileButtonState extends State<EditProfileButton> {
               padding: const EdgeInsets.all(2),
               child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const EditProfilePage()));
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => EditProfilePage(
+                          user: user, refreshProfile: refreshProfile),
+                    ));
+                  });
                 },
                 icon: const Icon(
                   Icons.edit,

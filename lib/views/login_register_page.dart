@@ -19,6 +19,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -90,51 +91,76 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
               ),
             ),
             Center(
-                child: submitButton(auth, isLogin, _controllerEmail,
-                    _controllerPassword, _formKey, context)),
+              child: ElevatedButton(
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    if (isLogin) {
+                      try {
+                        dynamic result = await auth.signInWithEmailAndPassword(
+                          email: _controllerEmail.text,
+                          password: _controllerPassword.text,
+                        );
+                        if (result != null) {
+                          scaffoldMessenger.showSnackBar(
+                            SnackBar(
+                              content: Text(result),
+                              action: SnackBarAction(
+                                label: 'Okay',
+                                onPressed: () {
+                                  scaffoldMessenger.hideCurrentSnackBar();
+                                },
+                              ),
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        debugPrint(e.toString());
+                      }
+                    } else if (!isLogin) {
+                      try {
+                        dynamic result =
+                            await auth.createUserWithEmailAndPassword(
+                          email: _controllerEmail.text,
+                          password: _controllerPassword.text,
+                        );
+
+                        if (result != null) {
+                          scaffoldMessenger.showSnackBar(
+                            SnackBar(
+                              content: Text(result),
+                              action: SnackBarAction(
+                                label: 'Okay',
+                                onPressed: () {
+                                  scaffoldMessenger.hideCurrentSnackBar();
+                                },
+                              ),
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        debugPrint(e.toString());
+                      }
+                    }
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(100, 40),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  backgroundColor: Theme.of(context).primaryColor,
+                ),
+                child: Text(
+                  isLogin ? 'LOGIN' : 'REGISTER',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-ElevatedButton submitButton(
-        Auth auth,
-        bool isLogin,
-        TextEditingController email,
-        TextEditingController password,
-        GlobalKey<FormState> formKey,
-        BuildContext context) =>
-    ElevatedButton(
-      onPressed: () async {
-        if (formKey.currentState!.validate()) {
-          if (isLogin) {
-            try {
-              await auth.signInWithEmailAndPassword(
-                  email: email.text, password: password.text);
-            } catch (e) {
-              debugPrint(e.toString());
-            }
-          } else if (!isLogin) {
-            try {
-              await auth.createUserWithEmailAndPassword(
-                  email: email.text, password: password.text);
-            } catch (e) {
-              debugPrint(e.toString());
-            }
-          }
-        }
-      },
-      style: ElevatedButton.styleFrom(
-        fixedSize: const Size(100, 40),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      child: Text(isLogin ? 'SIGN IN' : 'SIGN UP',
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          )),
-    );

@@ -38,10 +38,6 @@ class BuildTextForm extends StatelessWidget {
                 BorderRadius.all(Radius.circular(config.borderRadius))),
       ),
       validator: (value) {
-        // if (config.isLogin) {
-        //   //TODO Database Methods Auth To Check State
-        // }
-
         if (config.label == 'Email') {
           if (value!.isEmpty) {
             return 'Email Required';

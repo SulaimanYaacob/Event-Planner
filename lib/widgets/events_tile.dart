@@ -1,9 +1,10 @@
 import 'package:event_planner/models/events_model.dart';
 import 'package:flutter/material.dart';
+import '../views/detail_event.dart';
 
 class EventTile extends StatefulWidget {
-  final Event event;
   const EventTile({Key? key, required this.event}) : super(key: key);
+  final Event event;
 
   @override
   State<EventTile> createState() => _EventTileState();
@@ -34,7 +35,11 @@ class _EventTileState extends State<EventTile> {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(4.0)),
         ),
         child: InkWell(
-          onTap: () => debugPrint('Tapped ${event.title}'),
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailEvent(event: event),
+              )),
           child: GridTileBar(
             title: Text(event.title),
             subtitle: Text(event.subtitle),

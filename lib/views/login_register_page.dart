@@ -13,6 +13,8 @@ class LoginRegisterPage extends StatefulWidget {
 class _LoginRegisterPageState extends State<LoginRegisterPage> {
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerConfirmPassword =
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final auth = Auth();
   bool isLogin = true;
@@ -40,7 +42,6 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 50),
-        //change column to listview
         child: ListView(
           children: [
             SizedBox(
@@ -72,8 +73,8 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
             Form(
               key: _formKey,
               child: SizedBox(
-                height: 250,
-                child: Column(
+                height: 300,
+                child: ListView(
                   children: [
                     BuildTextForm(
                         config: TextFieldConfig(
@@ -86,7 +87,15 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                             label: 'Password',
                             controller: _controllerPassword,
                             borderRadius: 20)),
-                  ].withSpaceBetween(height: 25),
+                    !isLogin
+                        ? BuildTextForm(
+                            config: TextFieldConfig(
+                                label: 'Confirm Password',
+                                controller: _controllerConfirmPassword,
+                                controllerConfirmPassword: _controllerPassword,
+                                borderRadius: 20))
+                        : const SizedBox(height: 0),
+                  ].withSpaceBetween(height: 20),
                 ),
               ),
             ),

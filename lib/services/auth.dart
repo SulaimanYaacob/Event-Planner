@@ -29,20 +29,17 @@ class Auth {
     required String email,
     required String password,
   }) async {
-    try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      await _userCollection.doc(currentUser!.uid).set({
-        'id': currentUser!.uid,
-        'email': email,
-        'password': password,
-        'newUser': true
-      });
-    } on FirebaseAuthException catch (e) {
-      return e.message;
-    }
+    await _firebaseAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    await _userCollection.doc(currentUser!.uid).set({
+      'id': currentUser!.uid,
+      'email': email,
+      'password': password,
+      'isFirstTime': true,
+      'profileImage': "https://picsum.photos/seed/838/600"
+    });
   }
 
   Future<void> signOut() async {

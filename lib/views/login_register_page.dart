@@ -60,8 +60,8 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                   RichText(
                     text: TextSpan(
                         text: isLogin
-                            ? 'Don\'t have an account? Sign Up'
-                            : 'Already have an account? Sign In',
+                            ? 'Don\'t have an account? Register'
+                            : 'Already have an account? Login',
                         recognizer: TapGestureRecognizer()
                           ..onTap = () => setState(() => isLogin = !isLogin),
                         style:

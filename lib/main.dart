@@ -1,6 +1,7 @@
 import 'package:event_planner/drawer_navigation.dart';
 import 'package:event_planner/firebase_options.dart';
 import 'package:event_planner/services/auth.dart';
+import 'package:event_planner/views/add_eventpage.dart';
 import 'package:event_planner/views/login_register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,8 +25,11 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primarySwatch: Colors.blue,
-              primaryColor: const Color(0xff872d4a),
+              primaryColor: Color(0xFF872D4A),
             ),
+            routes: {
+              '/addEvent': (context) => const AddEventPage(),
+            },
             home: snapshot.data != null
                 ? const Navigation()
                 : const LoginRegisterPage(),

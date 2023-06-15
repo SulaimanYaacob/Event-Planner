@@ -1,4 +1,5 @@
 class Event {
+  final String? id;
   final String title;
   final String subtitle;
   final String? description;
@@ -11,6 +12,7 @@ class Event {
   final String? userId;
 
   Event({
+    this.id,
     required this.title,
     required this.subtitle,
     this.description,
@@ -25,6 +27,7 @@ class Event {
 
   factory Event.fromFirestore(Map<String, dynamic> firestore) {
     return Event(
+      id: firestore['id'],
       title: firestore['title'],
       subtitle: firestore['subtitle'],
       description: firestore['description'],
@@ -41,6 +44,8 @@ class Event {
 // for update/create event
   Map<String, dynamic> toFirestore() {
     return {
+      'id': id,
+      'userId': userId,
       'title': title,
       'subtitle': subtitle,
       'description': description,

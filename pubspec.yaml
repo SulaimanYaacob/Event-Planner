@@ -41,6 +41,7 @@ dependencies:
   firebase_auth: ^4.6.0
   cloud_firestore: ^4.7.0
   provider: ^6.0.5
+  image_picker:
   #flutter_icons: ^1.1.0
 
   floating_action_bubble: ^1.1.4

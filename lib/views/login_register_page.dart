@@ -45,7 +45,7 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
         child: ListView(
           children: [
             SizedBox(
-              height: 200,
+              height: 150,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

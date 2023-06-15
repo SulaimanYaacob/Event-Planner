@@ -11,27 +11,38 @@ class Auth {
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
-  Future<void> signInWithEmailAndPassword({
+  Future signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
-    await _firebaseAuth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      return e.message;
+    }
   }
 
-  Future<void> createUserWithEmailAndPassword({
+  Future createUserWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
-    await _firebaseAuth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    await _userCollection
-        .doc(currentUser!.uid)
-        .set({'id': currentUser!.uid, 'email': email, 'password': password});
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      await _userCollection.doc(currentUser!.uid).set({
+        'id': currentUser!.uid,
+        'email': email,
+        'password': password,
+        'newUser': true
+      });
+    } on FirebaseAuthException catch (e) {
+      return e.message;
+    }
   }
 
   Future<void> signOut() async {
@@ -40,7 +51,7 @@ class Auth {
 
   Future<String?> readUser() async {
     final DocumentSnapshot user =
-        await _userCollection.doc('d7CMTjd7kK7HzpupXdw4').get();
+        await _userCollection.doc(currentUser!.uid).get();
     // debugPrint(user.data().toString());
     return user.data().toString();
   }

@@ -13,12 +13,15 @@ class LoginRegisterPage extends StatefulWidget {
 class _LoginRegisterPageState extends State<LoginRegisterPage> {
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerConfirmPassword =
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final auth = Auth();
   bool isLogin = true;
 
   @override
   Widget build(BuildContext context) {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -39,7 +42,6 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 50),
-        //change column to listview
         child: ListView(
           children: [
             SizedBox(
@@ -71,8 +73,8 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
             Form(
               key: _formKey,
               child: SizedBox(
-                height: 250,
-                child: Column(
+                height: 300,
+                child: ListView(
                   children: [
                     BuildTextForm(
                         config: TextFieldConfig(
@@ -85,56 +87,89 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
                             label: 'Password',
                             controller: _controllerPassword,
                             borderRadius: 20)),
-                  ].withSpaceBetween(height: 25),
+                    !isLogin
+                        ? BuildTextForm(
+                            config: TextFieldConfig(
+                                label: 'Confirm Password',
+                                controller: _controllerConfirmPassword,
+                                controllerConfirmPassword: _controllerPassword,
+                                borderRadius: 20))
+                        : const SizedBox(height: 0),
+                  ].withSpaceBetween(height: 20),
                 ),
               ),
             ),
             Center(
-                child: submitButton(auth, isLogin, _controllerEmail,
-                    _controllerPassword, _formKey, context)),
+              child: ElevatedButton(
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    if (isLogin) {
+                      try {
+                        dynamic result = await auth.signInWithEmailAndPassword(
+                          email: _controllerEmail.text,
+                          password: _controllerPassword.text,
+                        );
+                        if (result != null) {
+                          scaffoldMessenger.showSnackBar(
+                            SnackBar(
+                              content: Text(result),
+                              action: SnackBarAction(
+                                label: 'Okay',
+                                onPressed: () {
+                                  scaffoldMessenger.hideCurrentSnackBar();
+                                },
+                              ),
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        debugPrint(e.toString());
+                      }
+                    } else if (!isLogin) {
+                      try {
+                        dynamic result =
+                            await auth.createUserWithEmailAndPassword(
+                          email: _controllerEmail.text,
+                          password: _controllerPassword.text,
+                        );
+
+                        if (result != null) {
+                          scaffoldMessenger.showSnackBar(
+                            SnackBar(
+                              content: Text(result),
+                              action: SnackBarAction(
+                                label: 'Okay',
+                                onPressed: () {
+                                  scaffoldMessenger.hideCurrentSnackBar();
+                                },
+                              ),
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        debugPrint(e.toString());
+                      }
+                    }
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(100, 40),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  backgroundColor: Theme.of(context).primaryColor,
+                ),
+                child: Text(
+                  isLogin ? 'LOGIN' : 'REGISTER',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-ElevatedButton submitButton(
-        Auth auth,
-        bool isLogin,
-        TextEditingController email,
-        TextEditingController password,
-        GlobalKey<FormState> formKey,
-        BuildContext context) =>
-    ElevatedButton(
-      onPressed: () async {
-        if (formKey.currentState!.validate()) {
-          if (isLogin) {
-            try {
-              await auth.signInWithEmailAndPassword(
-                  email: email.text, password: password.text);
-            } catch (e) {
-              debugPrint(e.toString());
-            }
-          } else if (!isLogin) {
-            try {
-              await auth.createUserWithEmailAndPassword(
-                  email: email.text, password: password.text);
-            } catch (e) {
-              debugPrint(e.toString());
-            }
-          }
-        }
-      },
-      style: ElevatedButton.styleFrom(
-        fixedSize: const Size(100, 40),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      child: Text(isLogin ? 'SIGN IN' : 'SIGN UP',
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          )),
-    );

@@ -4,16 +4,17 @@ class TimePicker extends StatefulWidget {
   final String label;
   final TextEditingController controller;
   final IconData icon;
+  final Function(TimeOfDay)? onTimeSelected;
 
   const TimePicker({
-    super.key,
+    Key? key,
     required this.label,
     required this.controller,
     this.icon = Icons.schedule,
-  });
+    this.onTimeSelected,
+  }) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _TimePickerState createState() => _TimePickerState();
 }
 
@@ -31,6 +32,10 @@ class _TimePickerState extends State<TimePicker> {
         selectedTime = pickedTime;
         widget.controller.text = pickedTime.format(context);
       });
+
+      if (widget.onTimeSelected != null) {
+        widget.onTimeSelected!(pickedTime);
+      }
     }
   }
 
@@ -60,3 +65,4 @@ class _TimePickerState extends State<TimePicker> {
     );
   }
 }
+

@@ -273,8 +273,8 @@ class _AddEventPageState extends State<AddEventPage> {
                                 description: _controllerDescription.text,
                                 venue: _controllerVenue.text,
                                 date: selectedDate,
-                                timeStart: DateTime(selectedDate!.year, selectedDate!.month, selectedDate!.day, selectedTimeStart!.hour, selectedTimeStart!.minute),
-                                timeEnd: DateTime(selectedDate!.year, selectedDate!.month, selectedDate!.day, selectedTimeEnd!.hour, selectedTimeEnd!.minute),
+                                timeStart: DateTime(selectedDate.year, selectedDate.month, selectedDate.day, selectedTimeStart!.hour, selectedTimeStart!.minute),
+                                timeEnd: DateTime(selectedDate.year, selectedDate.month, selectedDate.day, selectedTimeEnd!.hour, selectedTimeEnd!.minute),
                                 image: _controllerImage.text,
                                 recurring: false,
                               );

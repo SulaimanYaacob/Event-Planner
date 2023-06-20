@@ -6,17 +6,18 @@ class DateTimeWidget extends StatefulWidget {
   final TextEditingController controller;
   final DateFormat dateFormat;
   final IconData icon;
+  final Function(DateTime)? onDateSelected;
 
   const DateTimeWidget({
-    super.key,
+    Key? key,
     required this.label,
     required this.controller,
     required this.dateFormat,
     this.icon = Icons.calendar_today,
-  });
+    this.onDateSelected,
+  }) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _DateTimeWidgetState createState() => _DateTimeWidgetState();
 }
 
@@ -36,6 +37,10 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
         selectedDate = pickedDate;
         widget.controller.text = widget.dateFormat.format(selectedDate!);
       });
+
+      if (widget.onDateSelected != null) {
+        widget.onDateSelected!(pickedDate);
+      }
     }
   }
 
@@ -65,3 +70,4 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
     );
   }
 }
+

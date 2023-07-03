@@ -1,8 +1,8 @@
 import 'package:event_planner/views/edit_profile.dart';
+import 'package:event_planner/views/edit_profile_image.dart';
 import 'package:event_planner/widgets/edit_profile_button.dart';
 import 'package:flutter/material.dart';
 import '../models/users_model.dart';
-import '../models/picsum.dart';
 import '../widgets/profile_container.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -14,8 +14,6 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late User user = User("", "", "", "", "", 0, "", "", "", false);
-  late PicsumImage pics = PicsumImage("", "", 0, 0, "");
-  List<dynamic> picsumImages = [];
 
   @override
   void initState() {
@@ -37,17 +35,6 @@ class _ProfilePageState extends State<ProfilePage> {
               EditProfilePage(user: user, refreshProfile: refreshProfile),
         ));
       });
-    }
-  }
-
-  Future<void> fetchPicsumImages() async {
-    try {
-      final data = await PicsumImage.fetchPicsumImages();
-      setState(() {
-        picsumImages = data;
-      });
-    } catch (e) {
-      debugPrint('Error fetching Picsum images: $e');
     }
   }
 
@@ -89,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           shape: BoxShape.circle,
                                         ),
                                         child: Image.network(
-                                          'https://picsum.photos/seed/838/600',
+                                          user.profileImage,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -104,11 +91,22 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   border: Border.all(
                                                       color: Colors.white),
                                                   color: Colors.white70),
-                                              child: const IconButton(
-                                                  icon: Icon(Icons.edit,
-                                                      color: Colors.blue),
-                                                  iconSize: 15,
-                                                  onPressed: null)))
+                                              child: IconButton(
+                                                icon: const Icon(Icons.edit,
+                                                    color: Colors.blue),
+                                                iconSize: 15,
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          EditProfileImage(
+                                                              refreshProfile:
+                                                                  refreshProfile),
+                                                    ),
+                                                  );
+                                                },
+                                              )))
                                     ],
                                   ),
                                 ),

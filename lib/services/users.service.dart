@@ -40,7 +40,7 @@ class UserService {
   }
 
   Future<void> updateUser(
-      String dataType, String userData, String value, bool isFirstTime) async {
+      String dataType, String userData, String value) async {
     final DocumentSnapshot user =
         await _userCollection.doc(_firebaseAuth.currentUser!.uid).get();
     Map<String, dynamic> updateData = {};

@@ -125,34 +125,31 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ElevatedButton(
                 onPressed: () async {
                   if (isFirstTime) {
-                    await UserService().updateUser(
-                        "bool", "isFirstTime", "false", isFirstTime);
+                    await UserService()
+                        .updateUser("bool", "isFirstTime", "false");
                   }
 
                   if (!(_usernameController.text == "")) {
                     String username = _usernameController.text;
-                    await UserService().updateUser(
-                        "String", "username", "@$username", isFirstTime);
+                    await UserService()
+                        .updateUser("String", "username", "@$username");
                   }
                   if (!(_bioController.text == "")) {
                     String bio = _bioController.text;
-                    await UserService()
-                        .updateUser("String", "bio", bio, isFirstTime);
+                    await UserService().updateUser("String", "bio", bio);
                   }
                   if (!(_ageController.text == "")) {
                     String age = _ageController.text;
-                    await UserService()
-                        .updateUser("int", "age", age, isFirstTime);
+                    await UserService().updateUser("int", "age", age);
                   }
                   if (!(_jobController.text == "")) {
                     String job = _jobController.text;
-                    await UserService()
-                        .updateUser("String", "job", job, isFirstTime);
+                    await UserService().updateUser("String", "job", job);
                   }
                   if (!(_phoneNumController.text == "")) {
                     String phoneNum = _phoneNumController.text;
-                    await UserService().updateUser(
-                        "String", "phoneNum", phoneNum, isFirstTime);
+                    await UserService()
+                        .updateUser("String", "phoneNum", phoneNum);
                   }
 
                   widget.refreshProfile();

@@ -50,10 +50,8 @@ class _MyEventPageState extends State<MyEventPage>
             titleStyle: const TextStyle(fontSize: 16, color: Colors.white),
             onPress: () {
               //_animationController!.reverse();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const AddEventPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AddEventPage()));
             },
           )
         ],

@@ -12,7 +12,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddEventPage extends StatefulWidget {
-  const AddEventPage({Key? key}) : super(key: key);
+  const AddEventPage({Key? key, Event? event}) : super(key: key);
 
   @override
   State<AddEventPage> createState() => _AddEventPageState();
@@ -75,8 +75,8 @@ class _AddEventPageState extends State<AddEventPage> {
                       Navigator.pop(context);
                       getImage(ImageSource.gallery);
                     },
-                    child: const Row(
-                      children: [
+                    child: Row(
+                      children: const [
                         Icon(Icons.image),
                         Text('From Gallery'),
                       ],
@@ -88,8 +88,8 @@ class _AddEventPageState extends State<AddEventPage> {
                       Navigator.pop(context);
                       getImage(ImageSource.camera);
                     },
-                    child: const Row(
-                      children: [
+                    child: Row(
+                      children: const [
                         Icon(Icons.camera),
                         Text('From Camera'),
                       ],
@@ -266,22 +266,32 @@ class _AddEventPageState extends State<AddEventPage> {
                       // ADD EVENT BUTTON
                       OutlinedButton(
                           onPressed: () async {
-                           try {
+                            try {
                               Event event = Event(
                                 title: _controllerTitle.text,
                                 subtitle: _controllerSubtitle.text,
                                 description: _controllerDescription.text,
                                 venue: _controllerVenue.text,
                                 date: selectedDate,
-                                timeStart: DateTime(selectedDate.year, selectedDate.month, selectedDate.day, selectedTimeStart!.hour, selectedTimeStart!.minute),
-                                timeEnd: DateTime(selectedDate.year, selectedDate.month, selectedDate.day, selectedTimeEnd!.hour, selectedTimeEnd!.minute),
+                                timeStart: DateTime(
+                                    selectedDate.year,
+                                    selectedDate.month,
+                                    selectedDate.day,
+                                    selectedTimeStart!.hour,
+                                    selectedTimeStart!.minute),
+                                timeEnd: DateTime(
+                                    selectedDate.year,
+                                    selectedDate.month,
+                                    selectedDate.day,
+                                    selectedTimeEnd!.hour,
+                                    selectedTimeEnd!.minute),
                                 image: _controllerImage.text,
                                 recurring: false,
                               );
                               await EventService().addEvent(event);
                             } catch (e) {
-                                debugPrint(e as String?);
-                              }
+                              debugPrint(e as String?);
+                            }
                           },
                           child: const Text('Add Event'))
                     ].withSpaceBetween(height: 25),

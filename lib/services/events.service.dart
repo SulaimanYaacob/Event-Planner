@@ -49,7 +49,26 @@ class EventService {
     await eventCollection.doc(id).delete();
   }
 
-  Future<void> updateEvent(Event event) async {
-    await eventCollection.doc(event.id).update(event.toFirestore());
+  Future<void> updateEvent(String eventId, Event event) async {
+    try {
+      await eventCollection
+          .doc(eventId)
+          .update(event.toFirestore())
+          .then((doc) => eventCollection.doc(eventId).set({
+                'id': eventId,
+                'userId': FirebaseAuth.instance.currentUser!.uid,
+                'title': event.title,
+                'subtitle': event.subtitle,
+                'description': event.description,
+                'venue': event.venue,
+                'date': event.date,
+                'timeStart': event.timeStart,
+                'timeEnd': event.timeEnd,
+                'image': event.image,
+                'recurring': event.recurring,
+              }));
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 }

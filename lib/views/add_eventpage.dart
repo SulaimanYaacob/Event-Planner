@@ -12,7 +12,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddEventPage extends StatefulWidget {
-  const AddEventPage({Key? key}) : super(key: key);
+  const AddEventPage({Key? key, Event? event}) : super(key: key);
 
   @override
   State<AddEventPage> createState() => _AddEventPageState();
@@ -32,8 +32,9 @@ class _AddEventPageState extends State<AddEventPage> {
   final DateFormat _dateFormat = DateFormat('dd/MM/yy');
   XFile? image;
   final ImagePicker picker = ImagePicker();
-  TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
-  TimeOfDay _time2 = TimeOfDay(hour: 7, minute: 15);
+  DateTime selectedDate = DateTime.now();
+  TimeOfDay? selectedTimeStart;
+  TimeOfDay? selectedTimeEnd;
 
   // Event event = Event(
   //   title: '',
@@ -199,16 +200,31 @@ class _AddEventPageState extends State<AddEventPage> {
                         controller: _controllerDate,
                         dateFormat: _dateFormat,
                         icon: Icons.calendar_today,
+                        onDateSelected: (date) {
+                          setState(() {
+                            selectedDate = date;
+                          });
+                        },
                       ),
                       TimePicker(
                         label: 'Time Start',
                         controller: _controllerTimeStart,
                         icon: Icons.schedule,
+                        onTimeSelected: (time) {
+                          setState(() {
+                            selectedTimeStart = time;
+                          });
+                        },
                       ),
                       TimePicker(
                         label: 'Time End',
                         controller: _controllerTimeEnd,
                         icon: Icons.schedule,
+                        onTimeSelected: (time) {
+                          setState(() {
+                            selectedTimeEnd = time;
+                          });
+                        },
                       ),
 
                       // IMAGE FIELD (NOT WORKING ON CHROME DISPLAY)
@@ -256,12 +272,21 @@ class _AddEventPageState extends State<AddEventPage> {
                                 subtitle: _controllerSubtitle.text,
                                 description: _controllerDescription.text,
                                 venue: _controllerVenue.text,
-                                date: DateTime.now(),
-                                timeStart: DateTime.now(),
-                                timeEnd: DateTime.now(),
+                                date: selectedDate,
+                                timeStart: DateTime(
+                                    selectedDate.year,
+                                    selectedDate.month,
+                                    selectedDate.day,
+                                    selectedTimeStart!.hour,
+                                    selectedTimeStart!.minute),
+                                timeEnd: DateTime(
+                                    selectedDate.year,
+                                    selectedDate.month,
+                                    selectedDate.day,
+                                    selectedTimeEnd!.hour,
+                                    selectedTimeEnd!.minute),
                                 image: _controllerImage.text,
-                                recurring:
-                                    false, // Assuming it's not determined by user input.
+                                recurring: false,
                               );
                               await EventService().addEvent(event);
                             } catch (e) {

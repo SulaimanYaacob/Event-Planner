@@ -1,4 +1,3 @@
-import "package:event_planner/views/edit_profile.dart";
 import "package:event_planner/views/profile_page.dart";
 import "package:flutter/material.dart";
 

@@ -293,6 +293,7 @@ class _UpdateEventPageState extends State<UpdateEventPage> {
                               );
                               await EventService()
                                   .updateEvent(myEventId, event);
+                              Navigator.pop(context);
                             } catch (e) {
                               debugPrint(e as String?);
                             }
